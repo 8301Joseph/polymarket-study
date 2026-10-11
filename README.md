@@ -1,1 +1,1 @@
-# polymarket-study
+*Polymarket Calibration Project*
