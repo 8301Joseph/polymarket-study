@@ -1,73 +1,88 @@
 """
-02_pull_markets.py  --  NEEDS WIFI.  Downloads a list of finished (resolved)
-Polymarket markets and saves the raw answers to data/raw/markets/.
+02_pull_markets.py  --  NEEDS WIFI.  Downloads the list of finished (closed)
+Polymarket markets for each category and saves the raw replies.
 
 WHAT THIS DOES (in plain English)
 ---------------------------------
-Polymarket has a public website-for-computers (an "API") where you can ask
-"give me 100 closed markets" and it replies with a block of text in a format
-called JSON. We ask over and over (page 1, page 2, ...) and save each reply as
-its own file, untouched. We never edit these files. Later scripts read them.
+Polymarket's website-for-computers (the "API") can hand us a list of markets.
+Every market on Polymarket carries "tags" (labels such as Politics or Sports).
+Each tag has an ID number. The IDs below were looked up in Polymarket's own
+tag list:  Politics = 2,  Sports = 1.
 
-IMPORTANT: I wrote the web address and the setting names below FROM MEMORY.
-They may have changed. Everything you might need to fix is in the CONFIG block
-right below. When you have wifi, check Polymarket's developer docs and fix
-anything marked TODO. If you get an error, paste it to Claude.
+We ask for ONE category at a time, so we always know which category a market
+belongs to (the "category" field inside each market turned out to be empty).
+We save every reply exactly as received, in its own file. Later scripts read
+those files. We never edit them.
 
-HOW TO RUN (from the project folder, with wifi)
-    pip install requests
+Note: we do NOT filter by date here. Polymarket's date filter works on a
+market's "deadline" date, which is often a placeholder (for example 31 Dec for
+markets that actually finished months earlier). We filter by the real closing
+time later, in 03_select_sample.py.
+
+The script can be stopped and restarted: pages already saved are skipped.
+
+HOW TO RUN
+    pip install -r requirements.txt
     python src/02_pull_markets.py
 """
 
-import json       # for saving the replies
-import os         # for making folders
-import time       # for pausing between requests
-import requests   # for talking to the website  (install with: pip install requests)
+import json
+import os
+import time
+import requests
 
 # ----------------------------------------------------------------------------
-# CONFIG  -- the only part you should need to edit
+# CONFIG
 # ----------------------------------------------------------------------------
-BASE_URL = "https://gamma-api.polymarket.com/markets"   # TODO: check this is still right
-PAGE_SIZE = 100          # how many markets per request
-MAX_PAGES = 5            # START SMALL. 5 pages = ~500 markets. Raise later.
-PAUSE_SECONDS = 1.0      # wait between requests so we don't annoy the server
-OUTPUT_FOLDER = "data/raw/markets"
+BASE_URL = "https://gamma-api.polymarket.com/markets"   # confirmed in Polymarket's docs
+PAGE_SIZE = 100          # markets per request
+MAX_PAGES = 400          # safety limit per category (400 pages = up to 40,000 markets)
+PAUSE_SECONDS = 0.5      # wait between requests so we don't annoy the server
+MIN_VOLUME = 10000       # only markets with at least $10,000 traded (server-side filter)
 
-# The "question" we ask the server. TODO: check these setting names in the docs.
-BASE_PARAMS = {
-    "closed": "true",    # only finished markets
-    "limit": PAGE_SIZE,
+# One entry per category.  name -> tag ID from Polymarket's tag list.
+CATEGORIES = {
+    "sports": 1,
+    "politics": 2,
 }
+
+RAW_FOLDER = "data/raw/markets"
 
 # ----------------------------------------------------------------------------
 # MAIN LOOP
 # ----------------------------------------------------------------------------
-os.makedirs(OUTPUT_FOLDER, exist_ok=True)   # make the folder if it isn't there
+for name, tag_id in CATEGORIES.items():
+    folder = os.path.join(RAW_FOLDER, name)
+    os.makedirs(folder, exist_ok=True)
+    print(f"=== {name} (tag {tag_id}) ===")
 
-for page in range(MAX_PAGES):
-    params = dict(BASE_PARAMS)               # copy the settings...
-    params["offset"] = page * PAGE_SIZE      # ...and say which page we want (0, 100, 200, ...)
+    for page in range(MAX_PAGES):
+        filename = os.path.join(folder, f"page_{page:04d}.json")
+        if os.path.exists(filename):          # already downloaded: skip
+            continue
 
-    response = requests.get(BASE_URL, params=params, timeout=30)
+        params = {
+            "closed": "true",                 # finished markets only
+            "tag_id": tag_id,                 # this category only
+            "volume_num_min": MIN_VOLUME,
+            "limit": PAGE_SIZE,
+            "offset": page * PAGE_SIZE,       # which page: 0, 100, 200, ...
+        }
+        response = requests.get(BASE_URL, params=params, timeout=30)
 
-    # If the server says something went wrong, stop and show the problem.
-    if response.status_code != 200:
-        print(f"Problem on page {page}: status {response.status_code}")
-        print(response.text[:500])           # show the first 500 characters of the error
-        break
+        if response.status_code != 200:
+            print(f"Problem on page {page}: status {response.status_code}")
+            print(response.text[:500])
+            break
 
-    data = response.json()                   # turn the reply into a Python list
+        data = response.json()                # a Python list of markets
+        if len(data) == 0:                    # empty page = we reached the end
+            print(f"No more {name} markets after page {page - 1}.")
+            break
 
-    if len(data) == 0:                       # an empty page means we've reached the end
-        print("No more markets. Done.")
-        break
-
-    # Save the reply exactly as received.
-    filename = os.path.join(OUTPUT_FOLDER, f"page_{page:04d}.json")
-    with open(filename, "w") as f:
-        json.dump(data, f)
-
-    print(f"Saved page {page}: {len(data)} markets -> {filename}")
-    time.sleep(PAUSE_SECONDS)                # be polite
+        with open(filename, "w") as f:
+            json.dump(data, f)
+        print(f"Saved {name} page {page}: {len(data)} markets")
+        time.sleep(PAUSE_SECONDS)
 
 print("Finished pulling markets.")
