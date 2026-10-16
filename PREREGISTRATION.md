@@ -1,8 +1,5 @@
 # Pre-registration: Polymarket calibration study
 
-Design first drafted: 12 Oct 2026. Final version committed: 16 Oct 2026, before any data was pulled.
-Sample period: [fill in, e.g. markets that closed between DATE and DATE]
-
 ## Question
 Are Polymarket prices well calibrated, and are long shots overpriced?
 In other words: if a market says an event has a 20% chance, does it happen about 20% of the time?
