@@ -3,7 +3,7 @@
 
 WHAT THIS DOES 
 ---------------------------------
-We invent 2,000 fake prediction markets where WE know the true chance of each
+Invent 2,000 fake prediction markets where WE know the true chance of each
 event. Then we make the "market price" a slightly wrong version of the truth
 (it squashes everything toward 50%). That is the favorite-longshot bias.
 

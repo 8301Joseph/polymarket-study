@@ -132,7 +132,7 @@ def group_summary(rows):
 def summary_table(rows, title):
     """Long shots and favourites, at both thresholds, for each horizon."""
     print(f"\n=== {title} ===")
-    print(f"{'horizon':>8} {'group':>22} {'n':>6} {'avg price':>10} {'actual':>8} {'gap':>8}")
+    print(f"{'horizon':>8} {'group':>22} {'n':>6} {'avg price':>10} {'actual':>8} {'gap':>8} {'+/- margin':>11}")
     for horizon in HORIZONS:
         subset = [r for r in rows if r["horizon"] == horizon]
         for label, (low, high) in THRESHOLDS.items():
@@ -145,8 +145,17 @@ def summary_table(rows, title):
                     print(f"{horizon:>8} {group_name:>22}      0  (no data)")
                     continue
                 n, avg_p, actual, gap = s
-                flag = "  <- fewer than 30" if n < MIN_PER_GROUP else ""
-                print(f"{horizon:>8} {group_name:>22} {n:>6} {avg_p:>10.3f} {actual:>8.3f} {gap:>+8.3f}{flag}")
+                # 95% margin of error on the gap. Markets from the same event
+                # are counted together (see mean_and_error), so it is not too optimistic.
+                _, margin = mean_and_error([r["won"] - r["price"] for r in group],
+                                           [r["event_id"] for r in group])
+                if n < MIN_PER_GROUP:
+                    flag = "  <- fewer than 30, too few to test"
+                elif abs(gap) < margin:
+                    flag = "  <- gap smaller than margin: could be luck"
+                else:
+                    flag = "  <- gap larger than margin"
+                print(f"{horizon:>8} {group_name:>22} {n:>6} {avg_p:>10.3f} {actual:>8.3f} {gap:>+8.3f} {margin:>11.3f}{flag}")
 
 
 def cost_test(rows, title):

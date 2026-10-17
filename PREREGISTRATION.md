@@ -70,3 +70,7 @@ I will test two bets: betting against long shots (buying the opposite side) and 
 
 ## Revision note
 The first draft used each market's "endDate" as the end of the market and Polymarket's "category" field to label markets. Looking at the real data format, I found that "endDate" is often a placeholder (for example 31 Dec for markets that finished months earlier) and that "category" is empty. I therefore switched to tags for categories and to the decided-time rule above. If the snapshots had used the deadline, markets that resolved early would have been dropped as "already decided" at short horizons, which could have created a false favourite-longshot pattern. The earlier plan of one shared two-year window for both categories was also replaced by the periods above. No results had been looked at when this revision was made.
+
+## Addition (before any results were viewed)
+- The sample size is 1,500 markets per category (updated from 500 above).
+- The analysis table for long shots and favourites reports a 95% margin of error on each gap, using the same event-clustered method as the cost test. In "What would count as a result", a gap counts as "clear" only if it is larger than its margin of error and the group has at least 30 snapshots.
