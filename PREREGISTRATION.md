@@ -13,7 +13,7 @@ Resolved Polymarket markets in two categories, politics and sports. I chose the 
 | Politics | Politics (tag 2) | 1 Oct 2025 to 30 Sep 2026 |
 
 - A market's category is Polymarket's own tag. Markets carrying both tags are dropped.
-- Sample size: up to 500 markets per category, picked at random with seed 42 from all eligible markets.
+- Sample size: up to 1,500 markets per category, picked at random with seed 42 from all eligible markets.
 - Eligible: exactly two outcomes, a clear winner (no 50/50 or cancelled markets), and total volume of at least $10,000.
 - The extra sports years give more data for the sports-only results. The politics-versus-sports comparison uses only markets that closed on or after 1 Oct 2025, because that is the year both cover and it avoids mixing in a time effect.
 - Polymarket introduced trading fees in 2026 (sports on 18 Feb, most other categories on 30 Mar), so the most recent months are priced differently from earlier ones.

@@ -1,5 +1,5 @@
 """
-04_pull_prices.py  --  NEEDS WIFI.  Downloads the price history for every
+04_pull_prices.py  --  Downloads the price history for every
 market in data/clean/sample.csv.
 
 WHAT THIS DOES (in plain English)

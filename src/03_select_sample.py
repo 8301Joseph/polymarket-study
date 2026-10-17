@@ -1,5 +1,5 @@
 """
-03_select_sample.py  --  works offline once 02_pull_markets.py has run.
+03_select_sample.py
 
 WHAT THIS DOES (in plain English)
 ---------------------------------
@@ -38,7 +38,7 @@ from datetime import datetime
 # SETTINGS  (match PREREGISTRATION.md -- do not change after seeing results)
 # ----------------------------------------------------------------------------
 SEED = 42                 # makes the "random" pick repeatable
-SAMPLE_SIZE = 500         # markets per category
+SAMPLE_SIZE = 1500        # markets per category
 MIN_VOLUME = 10000
 
 # Sample period for each category, by the market's real closing time (UTC).
