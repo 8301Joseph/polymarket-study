@@ -1,0 +1,124 @@
+
+=== All markets, 7d before decided  (1129 snapshots) ===
+    bucket      n  avg price   actual      gap
+    0%-10%    340      0.042    0.074   +0.031
+   10%-20%    136      0.143    0.125   -0.018
+   20%-30%    109      0.249    0.358   +0.109
+   30%-40%     97      0.343    0.330   -0.013
+   40%-50%    148      0.458    0.385   -0.073
+   50%-60%    152      0.526    0.526   +0.000
+   60%-70%     45      0.649    0.644   -0.005
+   70%-80%     24      0.744    0.833   +0.089   <- fewer than 30, ignore
+   80%-90%     25      0.845    0.880   +0.035   <- fewer than 30, ignore
+  90%-100%     53      0.954    0.962   +0.008
+  Brier score: 0.1576   (always guessing 50% = 0.2500; lower is better)
+
+=== All markets, 1d before decided  (2002 snapshots) ===
+    bucket      n  avg price   actual      gap
+    0%-10%    615      0.042    0.033   -0.009
+   10%-20%    204      0.145    0.186   +0.041
+   20%-30%    194      0.250    0.284   +0.033
+   30%-40%    164      0.349    0.409   +0.060
+   40%-50%    252      0.453    0.500   +0.047
+   50%-60%    226      0.535    0.478   -0.057
+   60%-70%    109      0.642    0.670   +0.028
+   70%-80%     76      0.747    0.750   +0.003
+   80%-90%     70      0.850    0.886   +0.036
+  90%-100%     92      0.950    0.902   -0.047
+  Brier score: 0.1514   (always guessing 50% = 0.2500; lower is better)
+
+=== All markets, 1h before decided  (2100 snapshots) ===
+    bucket      n  avg price   actual      gap
+    0%-10%    646      0.040    0.034   -0.006
+   10%-20%    193      0.145    0.176   +0.031
+   20%-30%    204      0.251    0.284   +0.033
+   30%-40%    183      0.347    0.459   +0.112
+   40%-50%    263      0.454    0.475   +0.021
+   50%-60%    231      0.535    0.476   -0.059
+   60%-70%    129      0.641    0.651   +0.010
+   70%-80%     79      0.751    0.747   -0.005
+   80%-90%     65      0.849    0.862   +0.013
+  90%-100%    107      0.949    0.907   -0.043
+  Brier score: 0.1527   (always guessing 50% = 0.2500; lower is better)
+
+=== POLITICS (full sample period): long shots and favourites ===
+ horizon                  group      n  avg price   actual      gap  +/- margin
+      7d       long shots <0.30    453      0.086    0.121   +0.036       0.030  <- gap larger than margin
+      7d       favourites >0.70     76      0.909    0.961   +0.052       0.043  <- gap larger than margin
+      7d       long shots <0.10    302      0.041    0.079   +0.038       0.030  <- gap larger than margin
+      7d       favourites >0.90     49      0.957    0.980   +0.023       0.040  <- gap smaller than margin: could be luck
+      1d       long shots <0.30    734      0.077    0.080   +0.003       0.019  <- gap smaller than margin: could be luck
+      1d       favourites >0.70    144      0.886    0.917   +0.031       0.055  <- gap smaller than margin: could be luck
+      1d       long shots <0.10    535      0.040    0.028   -0.012       0.014  <- gap smaller than margin: could be luck
+      1d       favourites >0.90     75      0.954    0.933   -0.021       0.065  <- gap smaller than margin: could be luck
+      1h       long shots <0.30    748      0.075    0.074   -0.001       0.018  <- gap smaller than margin: could be luck
+      1h       favourites >0.70    148      0.892    0.912   +0.020       0.054  <- gap smaller than margin: could be luck
+      1h       long shots <0.10    559      0.038    0.030   -0.008       0.014  <- gap smaller than margin: could be luck
+      1h       favourites >0.90     84      0.954    0.940   -0.014       0.058  <- gap smaller than margin: could be luck
+
+=== SPORTS (full sample period): long shots and favourites ===
+ horizon                  group      n  avg price   actual      gap  +/- margin
+      7d       long shots <0.30    132      0.167    0.197   +0.030       0.066  <- gap smaller than margin: could be luck
+      7d       favourites >0.70     26      0.788    0.769   -0.019       0.168  <- fewer than 30, too few to test
+      7d       long shots <0.10     38      0.047    0.026   -0.021       0.050  <- gap smaller than margin: could be luck
+      7d       favourites >0.90      4      0.917    0.750   -0.167       0.417  <- fewer than 30, too few to test
+      1d       long shots <0.30    279      0.169    0.194   +0.025       0.045  <- gap smaller than margin: could be luck
+      1d       favourites >0.70     91      0.812    0.747   -0.065       0.089  <- gap smaller than margin: could be luck
+      1d       long shots <0.10     80      0.053    0.062   +0.009       0.052  <- gap smaller than margin: could be luck
+      1d       favourites >0.90     14      0.934    0.714   -0.220       0.235  <- fewer than 30, too few to test
+      1h       long shots <0.30    295      0.167    0.200   +0.033       0.044  <- gap smaller than margin: could be luck
+      1h       favourites >0.70    101      0.818    0.752   -0.066       0.084  <- gap smaller than margin: could be luck
+      1h       long shots <0.10     87      0.051    0.057   +0.006       0.047  <- gap smaller than margin: could be luck
+      1h       favourites >0.90     20      0.934    0.750   -0.184       0.188  <- fewer than 30, too few to test
+
+=== POLITICS (comparison year only, from 2025-10-01) ===
+ horizon                  group      n  avg price   actual      gap  +/- margin
+      7d       long shots <0.30    453      0.086    0.121   +0.036       0.030  <- gap larger than margin
+      7d       favourites >0.70     76      0.909    0.961   +0.052       0.043  <- gap larger than margin
+      7d       long shots <0.10    302      0.041    0.079   +0.038       0.030  <- gap larger than margin
+      7d       favourites >0.90     49      0.957    0.980   +0.023       0.040  <- gap smaller than margin: could be luck
+      1d       long shots <0.30    734      0.077    0.080   +0.003       0.019  <- gap smaller than margin: could be luck
+      1d       favourites >0.70    144      0.886    0.917   +0.031       0.055  <- gap smaller than margin: could be luck
+      1d       long shots <0.10    535      0.040    0.028   -0.012       0.014  <- gap smaller than margin: could be luck
+      1d       favourites >0.90     75      0.954    0.933   -0.021       0.065  <- gap smaller than margin: could be luck
+      1h       long shots <0.30    748      0.075    0.074   -0.001       0.018  <- gap smaller than margin: could be luck
+      1h       favourites >0.70    148      0.892    0.912   +0.020       0.054  <- gap smaller than margin: could be luck
+      1h       long shots <0.10    559      0.038    0.030   -0.008       0.014  <- gap smaller than margin: could be luck
+      1h       favourites >0.90     84      0.954    0.940   -0.014       0.058  <- gap smaller than margin: could be luck
+
+=== SPORTS (comparison year only, from 2025-10-01) ===
+ horizon                  group      n  avg price   actual      gap  +/- margin
+      7d       long shots <0.30    118      0.171    0.212   +0.041       0.072  <- gap smaller than margin: could be luck
+      7d       favourites >0.70     26      0.788    0.769   -0.019       0.168  <- fewer than 30, too few to test
+      7d       long shots <0.10     32      0.046    0.031   -0.015       0.059  <- gap smaller than margin: could be luck
+      7d       favourites >0.90      4      0.917    0.750   -0.167       0.417  <- fewer than 30, too few to test
+      1d       long shots <0.30    245      0.172    0.208   +0.036       0.050  <- gap smaller than margin: could be luck
+      1d       favourites >0.70     88      0.813    0.750   -0.063       0.090  <- gap smaller than margin: could be luck
+      1d       long shots <0.10     66      0.053    0.076   +0.023       0.062  <- gap smaller than margin: could be luck
+      1d       favourites >0.90     13      0.934    0.692   -0.242       0.249  <- fewer than 30, too few to test
+      1h       long shots <0.30    261      0.169    0.211   +0.042       0.048  <- gap smaller than margin: could be luck
+      1h       favourites >0.70     99      0.818    0.747   -0.070       0.086  <- gap smaller than margin: could be luck
+      1h       long shots <0.10     75      0.051    0.067   +0.016       0.055  <- gap smaller than margin: could be luck
+      1h       favourites >0.90     19      0.934    0.737   -0.198       0.196  <- fewer than 30, too few to test
+
+=== COST TEST, POLITICS (full sample period) ===
+(primary thresholds: long shot < 0.30, favourite > 0.70; profit in cents per share, +/- 95% margin)
+  7d   bet against long shots: 0c cost: -3.6 (+/-3.0) | 1c cost: -4.6 (+/-3.0) | 2c cost: -5.6 (+/-3.0) | 4c cost: -7.6 (+/-3.0)
+  7d          back favourites: 0c cost: +5.2 (+/-4.3) | 1c cost: +4.2 (+/-4.3) | 2c cost: +3.2 (+/-4.3) | 4c cost: +1.2 (+/-4.3)
+  1d   bet against long shots: 0c cost: -0.3 (+/-1.9) | 1c cost: -1.3 (+/-1.9) | 2c cost: -2.3 (+/-1.9) | 4c cost: -4.3 (+/-1.9)
+  1d          back favourites: 0c cost: +3.1 (+/-5.5) | 1c cost: +2.1 (+/-5.5) | 2c cost: +1.1 (+/-5.5) | 4c cost: -0.9 (+/-5.5)
+  1h   bet against long shots: 0c cost: +0.1 (+/-1.8) | 1c cost: -0.9 (+/-1.8) | 2c cost: -1.9 (+/-1.8) | 4c cost: -3.9 (+/-1.8)
+  1h          back favourites: 0c cost: +2.0 (+/-5.4) | 1c cost: +1.0 (+/-5.4) | 2c cost: -0.0 (+/-5.4) | 4c cost: -2.0 (+/-5.4)
+
+=== COST TEST, SPORTS (full sample period) ===
+(primary thresholds: long shot < 0.30, favourite > 0.70; profit in cents per share, +/- 95% margin)
+  7d   bet against long shots: 0c cost: -3.0 (+/-6.6) | 1c cost: -4.0 (+/-6.6) | 2c cost: -5.0 (+/-6.6) | 4c cost: -7.0 (+/-6.6)
+  7d          back favourites: only 26 snapshots, too few
+  1d   bet against long shots: 0c cost: -2.5 (+/-4.5) | 1c cost: -3.5 (+/-4.5) | 2c cost: -4.5 (+/-4.5) | 4c cost: -6.5 (+/-4.5)
+  1d          back favourites: 0c cost: -6.5 (+/-8.9) | 1c cost: -7.5 (+/-8.9) | 2c cost: -8.5 (+/-8.9) | 4c cost: -10.5 (+/-8.9)
+  1h   bet against long shots: 0c cost: -3.3 (+/-4.4) | 1c cost: -4.3 (+/-4.4) | 2c cost: -5.3 (+/-4.4) | 4c cost: -7.3 (+/-4.4)
+  1h          back favourites: 0c cost: -6.6 (+/-8.4) | 1c cost: -7.6 (+/-8.4) | 2c cost: -8.6 (+/-8.4) | 4c cost: -10.6 (+/-8.4)
+
+REMINDER: a gap can be luck. Never claim a bias from one group. Look for the
+same pattern across horizons, check the group sizes, and compare the gap with the
+margin of error. Costs are ASSUMED: the price history does not show the spread.
